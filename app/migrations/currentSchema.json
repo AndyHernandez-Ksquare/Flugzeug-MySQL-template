@@ -1,0 +1,147 @@
+{
+  "tables": {
+    "jwtblacklist": {
+      "tableName": "jwtblacklist",
+      "schema": {
+        "id": {
+          "allowNull": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "token": {
+          "allowNull": false,
+          "field": "token",
+          "seqType": "Sequelize.STRING(512)"
+        },
+        "expires": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": null
+          },
+          "field": "expires",
+          "seqType": "Sequelize.DATE"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": []
+    },
+    "profile": {
+      "tableName": "profile",
+      "schema": {
+        "id": {
+          "allowNull": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "time_zone": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": null
+          },
+          "field": "time_zone",
+          "seqType": "Sequelize.STRING"
+        },
+        "locale": {
+          "allowNull": true,
+          "field": "locale",
+          "seqType": "Sequelize.ENUM('en', 'es')"
+        },
+        "userId": {
+          "field": "userId",
+          "name": "userId",
+          "allowNull": true,
+          "references": {
+            "model": "user",
+            "key": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": []
+    },
+    "user": {
+      "tableName": "user",
+      "schema": {
+        "id": {
+          "allowNull": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "name": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": null
+          },
+          "field": "name",
+          "seqType": "Sequelize.STRING"
+        },
+        "email": {
+          "allowNull": false,
+          "unique": true,
+          "validate": {
+            "isEmail": true
+          },
+          "field": "email",
+          "seqType": "Sequelize.STRING"
+        },
+        "password": {
+          "allowNull": false,
+          "validate": {
+            "isLength": {
+              "min": 8
+            }
+          },
+          "field": "password",
+          "seqType": "Sequelize.STRING"
+        },
+        "role": {
+          "allowNull": false,
+          "defaultValue": {
+            "value": "user"
+          },
+          "field": "role",
+          "seqType": "Sequelize.ENUM('user', 'admin')"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": []
+    }
+  },
+  "revision": "20231009141521"
+}
